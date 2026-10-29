@@ -2429,7 +2429,20 @@ async function openWO(wo=null){
         <div class="form-group form-full"><label class="form-label">Keluhan</label><textarea id="f-wo-keluhan" class="form-input">${wo?.keluhan||''}</textarea></div>
         <div class="form-group form-full"><label class="form-label">Diagnosa / Pekerjaan</label><textarea id="f-wo-diagnosa" class="form-input">${wo?.diagnosa||''}</textarea></div>
         <div class="form-group form-full">
-          
+         <label class="form-label">Tandai Area Kendaraan <span style="font-size:10px;color:var(--text3)">(opsional — ketuk bagian mobil untuk menandai, ketuk tanda untuk menghapus, geser untuk memutar)</span></label>
+          <div style="position:relative;border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(180deg,#34383d,#1c1c1e);overflow:hidden">
+            <div id="wo-3d" style="width:100%;height:290px;cursor:grab;touch-action:pan-y"></div>
+            <div id="wo-3d-msg" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:rgba(255,255,255,.7);font-size:12px;pointer-events:none"></div>
+            <div style="position:absolute;top:8px;right:8px;display:flex;gap:6px">
+              <button type="button" id="wo-3d-flip" class="btn btn-outline btn-sm" style="background:#fff" onclick="woAreaFlipView()"><i class="ti ti-arrow-down"></i> Lihat bawah</button>
+              <button type="button" class="btn btn-outline btn-sm" style="background:#fff" onclick="woAreaResetView()" title="Kembalikan sudut pandang"><i class="ti ti-refresh"></i></button>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:6px">Kerusakan di bawah mobil? Tekan <b>Lihat bawah</b>, lalu ketuk bagian kolong: depan = mesin/oli, tengah = as/knalpot, belakang = tangki/gardan.</div>
+          <div id="wo-area-list" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"></div>
+          <div id="wo-area-other"></div>
+        </div>
+      </div> 
       <div class="divider"></div>
       <div class="section-hdr">
         <h2><i class="ti ti-tools"></i> Sparepart</h2>
