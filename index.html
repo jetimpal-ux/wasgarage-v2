@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#d32f2f"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<title>WAS SOB V.2</title>
+<title>Jef-app-build</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
@@ -570,7 +570,7 @@ code{font-family:monospace;background:none;color:var(--orange);padding:0;border-
       <div class="garage-login-icon" id="login-icon-fallback">
         <i class="ti ti-tool"></i>
       </div>
-      <div class="garage-login-title">JEF-SOFTWARE=ENGINEER</div>
+      <div class="garage-login-title">JEF-APP-BUILD</div>
       <div class="garage-login-tagline">Sistem Operasional Bengkel</div>
     </div>
 
@@ -614,7 +614,7 @@ code{font-family:monospace;background:none;color:var(--orange);padding:0;border-
   <div class="garage-login-wrap">
     <div class="garage-login-brand">
       <div class="garage-login-icon"><i class="ti ti-lock"></i></div>
-      <div class="garage-login-title">JEF-SOFTWARE-ENGINEER</div>
+      <div class="garage-login-title">JEF-APP-BUILD</div>
       <div class="garage-login-tagline">Buat Password Baru</div>
     </div>
     <div class="garage-login-card">
@@ -644,7 +644,7 @@ code{font-family:monospace;background:none;color:var(--orange);padding:0;border-
       </button>
 
       <div style="text-align:center;margin-top:16px;font-size:11px;color:#546e7a;font-family:'Poppins',sans-serif">
-        by.Jefmanado 2026 &mdash; v3.26 &middot; build Okt26-F
+        by.Jefmanado 2026 &mdash; v3.26 &middot; build 11Okt26-F
       </div>
     </div>
   </div>
@@ -667,8 +667,8 @@ code{font-family:monospace;background:none;color:var(--orange);padding:0;border-
     <div id="topnav-header">
       <div class="sb-logo-icon" style="background:var(--primary)"><i class="ti ti-tool" style="color:#fff;font-size:16px"></i></div>
       <div>
-        <div class="sb-logo-text">WAS SOB V.2</div>
-        <div class="sb-logo-sub">Je.V.2.26 ORA ET LABORA &middot; build Okt26-F</div>
+        <div class="sb-logo-text">Jef-app-build</div>
+        <div class="sb-logo-sub">Je.V.3.26 - Ora et Labora &middot; build 11Okt26-F</div>
       </div>
       <div id="topnav-user">
         <div style="text-align:right">
@@ -6153,234 +6153,6 @@ window.addEventListener('DOMContentLoaded', async()=>{
   initLogin3D();
 });
 
-</script>
- <style>
-    /* Overlay untuk akses ditolak */
-    .akses-ditolak-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 9999;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-    
-    .akses-ditolak-overlay.active {
-        display: flex;
-    }
-    
-    .akses-ditolak-box {
-        background: white;
-        padding: 40px;
-        border-radius: 10px;
-        text-align: center;
-        max-width: 400px;
-    }
-    
-    .akses-ditolak-box h2 {
-        color: #dc3545;
-        margin-bottom: 15px;
-    }
-    
-    .akses-ditolak-box p {
-        color: #666;
-        margin-bottom: 20px;
-    }
-    
-    .akses-ditolak-box button {
-        background: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-    
-    .akses-ditolak-box button:hover {
-        background: #0056b3;
-    }
-</style>
-
-<!-- Overlay Akses Ditolak -->
-<div id="aksesDitolak" class="akses-ditolak-overlay">
-    <div class="akses-ditolak-box">
-        <h2>🚫 Akses Ditolak</h2>
-        <p>Halaman Stok Gudang hanya dapat diakses oleh Owner dan Admin.</p>
-        <button onclick="window.location.href='dashboard.html'">Kembali ke Dashboard</button>
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Ambil data user dari localStorage
-    const userData = JSON.parse(localStorage.getItem('currentUser') || localStorage.getItem('user') || '{}');
-    const userRole = (userData.role || userData.level || 'user').toLowerCase();
-    
-    // 2. Cek apakah user adalah kasir atau mekanik
-    const roleTerbatas = ['kasir', 'mekanik'];
-    
-    if (roleTerbatas.includes(userRole)) {
-        // Sembunyikan semua konten halaman stok gudang
-        const mainContent = document.querySelector('main') || 
-                           document.querySelector('.container') || 
-                           document.querySelector('#app') ||
-                           document.body;
-        
-        if (mainContent) {
-            mainContent.style.display = 'none';
-        }
-        
-        // Tampilkan overlay akses ditolak
-        const overlay = document.getElementById('aksesDitolak');
-        if (overlay) {
-            overlay.classList.add('active');
-        }
-        
-        // Log untuk debugging
-        console.log(`Akses ditolak untuk role: ${userRole}`);
-    }
-});
-</script>
-<style>
-    /* Class untuk menyembunyikan tombol Edit */
-    .btn-edit-terbatas {
-        display: none !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-        opacity: 0 !important;
-        width: 0 !important;
-        height: 0 !important;
-        overflow: hidden !important;
-    }
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // =====================================================
-    // 1. DETEKSI ROLE USER DARI LOCALSTORAGE
-    // =====================================================
-    // Coba beberapa kemungkinan key yang digunakan sistem login WAS GARAGE
-    const userData = 
-        JSON.parse(localStorage.getItem('currentUser') || 'null') ||
-        JSON.parse(localStorage.getItem('user') || 'null') ||
-        JSON.parse(localStorage.getItem('userData') || 'null') ||
-        JSON.parse(localStorage.getItem('loginData') || 'null') ||
-        JSON.parse(sessionStorage.getItem('currentUser') || 'null');
-
-    const userRole = (userData?.role || userData?.level || userData?.hak_akses || 'user').toLowerCase().trim();
-
-    console.log('🔐 Role user terdeteksi:', userRole);
-
-    // =====================================================
-    // 2. CEK APAKAH USER BUKAN OWNER
-    // =====================================================
-    const isOwner = userRole === 'owner';
-
-    if (!isOwner) {
-        console.log('🚫 Bukan Owner - Tombol Edit akan disembunyikan');
-
-        // =====================================================
-        // 3. SEMBUNYIKAN TOMBOL EDIT DENGAN BERBAGAI METODE
-        // =====================================================
-
-        // Metode A: Cari tombol berdasarkan icon/text (paling fleksibel)
-        const semuaTombol = document.querySelectorAll('button, a, .btn, [onclick*="edit"], [onclick*="Edit"]');
-        semuaTombol.forEach(btn => {
-            const teks = (btn.textContent || btn.innerText || '').toLowerCase().trim();
-            const html = (btn.innerHTML || '').toLowerCase();
-            const title = (btn.getAttribute('title') || '').toLowerCase();
-            const ariaLabel = (btn.getAttribute('aria-label') || '').toLowerCase();
-
-            // Deteksi tombol Edit berdasarkan berbagai kemungkinan
-            const adalahTombolEdit = 
-                teks === 'edit' || 
-                teks === 'ubah' || 
-                teks === '✏️' || 
-                teks === '✎' ||
-                html.includes('edit') ||
-                html.includes('fa-edit') ||
-                html.includes('fa-pen') ||
-                html.includes('pencil') ||
-                title.includes('edit') ||
-                title.includes('ubah') ||
-                ariaLabel.includes('edit') ||
-                ariaLabel.includes('ubah');
-
-            if (adalahTombolEdit) {
-                btn.classList.add('btn-edit-terbatas');
-                
-                // Jika tombol ada di dalam container (td/tr), sembunyikan juga container-nya
-                const parent = btn.closest('td, .aksi-cell, .action-cell');
-                if (parent) {
-                    // Hitung berapa tombol yang masih terlihat di parent ini
-                    const tombolLain = parent.querySelectorAll('button:not(.btn-edit-terbatas), a:not(.btn-edit-terbatas)');
-                    if (tombolLain.length === 0) {
-                        parent.classList.add('btn-edit-terbatas');
-                    }
-                }
-            }
-        });
-
-        // Metode B: Cari berdasarkan class umum tombol edit
-        const tombolDenganClassEdit = document.querySelectorAll(
-            '.btn-edit, .edit-btn, .btn-ubah, .btn-warning, [class*="edit"], [class*="Edit"]'
-        );
-        tombolDenganClassEdit.forEach(btn => {
-            // Hindari menyembunyikan tombol "Tambah" atau tombol lain yang kebetulan punya class mirip
-            const teks = (btn.textContent || '').toLowerCase().trim();
-            if (teks === 'edit' || teks === 'ubah' || teks === '✏️') {
-                btn.classList.add('btn-edit-terbatas');
-            }
-        });
-
-        // Metode C: Sembunyikan kolom "AKSI" di header tabel stok gudang
-        // jika hanya ada tombol Edit di dalamnya (opsional, sesuaikan kebutuhan)
-        const headers = document.querySelectorAll('th');
-        headers.forEach(th => {
-            if (th.textContent.trim().toUpperCase() === 'AKSI') {
-                // Periksa apakah di kolom ini hanya ada tombol Edit
-                const rows = document.querySelectorAll('tbody tr');
-                let hanyaEdit = true;
-                rows.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    const index = Array.from(headers).indexOf(th);
-                    if (cells[index]) {
-                        const tombolDiCell = cells[index].querySelectorAll('button, a');
-                        tombolDiCell.forEach(t => {
-                            const teksTombol = (t.textContent || '').toLowerCase().trim();
-                            if (teksTombol !== 'edit' && teksTombol !== 'ubah' && teksTombol !== '✏️' && teksTombol !== '🗑️' && teksTombol !== 'delete' && teksTombol !== 'hapus') {
-                                hanyaEdit = false;
-                            }
-                        });
-                    }
-                });
-            }
-        });
-
-        // =====================================================
-        // 4. NONAKTIFKAN SHORTCUT KEYBOARD / EVENT LISTENER EDIT
-        // =====================================================
-        document.addEventListener('click', function(e) {
-            const target = e.target.closest('button, a');
-            if (target) {
-                const teks = (target.textContent || '').toLowerCase().trim();
-                if (teks === 'edit' || teks === 'ubah') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('⛔ Aksi edit diblokir untuk role:', userRole);
-                }
-            }
-        }, true);
-    } else {
-        console.log('✅ Owner login - Semua tombol Edit ditampilkan');
-    }
-});
 </script>
 </body>
 </html>
