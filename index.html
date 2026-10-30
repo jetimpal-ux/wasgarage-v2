@@ -6153,5 +6153,114 @@ window.addEventListener('DOMContentLoaded', async()=>{
 });
 
 </script>
+ <script>
+(function() {
+    'use strict';
+    
+    // 1. DETEKSI ROLE USER DARI LOCALSTORAGE
+    function getRole() {
+        const keys = ['currentUser', 'user', 'userData', 'loginData', 'wasUser'];
+        for (const key of keys) {
+            try {
+                const data = JSON.parse(localStorage.getItem(key));
+                if (data && data.role) return data.role.toLowerCase().trim();
+            } catch(e) {}
+        }
+        return 'user';
+    }
+    
+    const userRole = getRole();
+    console.log('🔐 [WAS-GARAGE] Role terdeteksi:', userRole);
+    
+    // Tambah class ke body untuk keperluan CSS
+    document.body.classList.add('role-' + userRole);
+
+    // Jika Owner, hentikan script (Owner boleh akses semua)
+    if (userRole === 'owner') return;
+
+    // 2. FUNGSI UTAMA: MENYEMBUNYIKAN TOMBOL
+    function sembunyikanTombol() {
+        // Cari semua baris di tabel stok gudang
+        const rows = document.querySelectorAll('#body-stok tr, tbody tr');
+        
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells.length === 0) return;
+            
+            // Biasanya tombol aksi ada di cell terakhir
+            const lastCell = cells[cells.length - 1];
+            const buttons = lastCell.querySelectorAll('button, a, [onclick]');
+            
+            buttons.forEach(btn => {
+                const onclick = (btn.getAttribute('onclick') || '').toLowerCase();
+                const text = (btn.textContent || '').toLowerCase().trim();
+                const html = btn.innerHTML.toLowerCase();
+                const title = (btn.getAttribute('title') || '').toLowerCase();
+                
+                // Deteksi Tombol EDIT
+                const isEdit = onclick.includes('edit') || onclick.includes('ubah') ||
+                              text === 'edit' || text === 'ubah' || 
+                              html.includes('edit') || html.includes('pencil') ||
+                              title.includes('edit');
+                
+                // Deteksi Tombol HAPUS
+                const isDelete = onclick.includes('hapus') || onclick.includes('delete') ||
+                                text === 'hapus' || text === 'delete' || 
+                                html.includes('trash') || html.includes('delete') ||
+                                title.includes('hapus');
+
+                // Deteksi Tombol TAMBAH (Biasanya di luar tabel, tapi kita cek juga)
+                const isTambah = text.includes('tambah') || onclick.includes('modal-brg');
+
+                // EKSEKUSI PENYEMBUNYIAN
+                
+                // Sembunyikan EDIT untuk SEMUA non-owner
+                if (isEdit) {
+                    btn.style.cssText = 'display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; pointer-events:none !important;';
+                    btn.disabled = true;
+                }
+                
+                // Sembunyikan HAPUS untuk SEMUA non-owner
+                if (isDelete) {
+                    btn.style.cssText = 'display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; pointer-events:none !important;';
+                    btn.disabled = true;
+                }
+            });
+        });
+
+        // Sembunyikan Tombol "Tambah Barang" di Header (Biasanya di atas tabel)
+        const semuaTombol = document.querySelectorAll('button, a');
+        semuaTombol.forEach(btn => {
+            const text = (btn.textContent || '').toLowerCase().trim();
+            const onclick = (btn.getAttribute('onclick') || '').toLowerCase();
+            
+            // Jika tombol berisi kata "Tambah Barang" atau membuka modal barang (dan bukan di dalam modal itu sendiri)
+            if ((text.includes('tambah barang') || text === '+ tambah' || onclick.includes("openModal('modal-brg'")) 
+                && !btn.closest('.modal')) {
+                btn.style.cssText = 'display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; pointer-events:none !important;';
+                btn.disabled = true;
+            }
+        });
+    }
+
+    // 3. JALANKAN FUNGSI SECARA BERULANG (Karena tabel di-render dinamis)
+    // Jalankan segera
+    sembunyikanTombol();
+    
+    // Jalankan setiap 500ms selama 15 detik pertama untuk menangkap render tabel
+    let counter = 0;
+    const interval = setInterval(() => {
+        sembunyikanTombol();
+        counter++;
+        if (counter > 30) clearInterval(interval); 
+    }, 500);
+
+    // Jalankan setiap kali user scroll atau klik (untuk jaga-jaga)
+    window.addEventListener('scroll', sembunyikanTombol);
+    window.addEventListener('click', sembunyikanTombol);
+
+    console.log('✅ [WAS-GARAGE] Proteksi tombol Tambah/Edit/Hapus aktif untuk role:', userRole);
+})();
+</script> 
 </body>
 </html>
