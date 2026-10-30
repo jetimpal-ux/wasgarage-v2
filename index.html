@@ -668,7 +668,7 @@ code{font-family:monospace;background:none;color:var(--orange);padding:0;border-
       <div class="sb-logo-icon" style="background:var(--primary)"><i class="ti ti-tool" style="color:#fff;font-size:16px"></i></div>
       <div>
         <div class="sb-logo-text">WAS GARAGE</div>
-        <div class="sb-logo-sub">Je.V.2.26 - Ora et Labora &middot; build 11Okt26-F</div>
+        <div class="sb-logo-sub">Je.V.2.26 - Ora et Labora &middot; build Okt26-F</div>
       </div>
       <div id="topnav-user">
         <div style="text-align:right">
@@ -5730,7 +5730,7 @@ function renderWoOtherPicker(){
   if(!el) return;
   const canManage=['owner','admin'].includes((currentUser?.role||'').toLowerCase());
   el.innerHTML='<div style="font-size:11px;color:var(--text3);margin:10px 0 4px">Bagian dalam yang tidak terlihat di model (ketuk untuk memilih):'
-    +(canManage?'<span class="area-manage" onclick="woOtherManage()">✎ Kelola daftar</span>':'<span style="font-size:10px;margin-left:8px;opacity:.8">(daftar diatur owner/admin)</span>')+'</div>'
+    +(canManage?'<span class="area-manage" onclick="woOtherManage()">✎ Kelola daftar</span>':'<span style="font-size:10px;margin-left:8px;opacity:.8">(daftar diatur owner)</span>')+'</div>'
     +'<div style="display:flex;flex-wrap:wrap;gap:6px">'
     +woOtherDisplay().map((n,i)=>{
         const on=_woAreas.some(m=>m.other&&m.label===n);
