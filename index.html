@@ -5585,5 +5585,141 @@ if(!isResetLink) init();
 initLogin3D();
 });
 </script>
+<script>
+(function() {
+    'use strict';
+    
+    // ============================================================
+    // 1. DETEKSI ROLE USER DARI LOCALSTORAGE (format aplikasi online Anda)
+    // ============================================================
+    function getRole() {
+        // Aplikasi online Anda simpan user di key 'wg_user'
+        const userData = JSON.parse(localStorage.getItem('wg_user') || 'null');
+        if (userData && userData.role) return userData.role.toLowerCase().trim();
+        return 'user';
+    }
+    
+    const userRole = getRole();
+    console.log('🔐 [WAS-GARAGE ONLINE] Role terdeteksi:', userRole);
+    
+    // Jika Owner, hentikan script (Owner boleh akses semua)
+    if (userRole === 'owner') return;
+    
+    // ============================================================
+    // 2. FUNGSI UTAMA: MENYEMBUNYIKAN TOMBOL DI HALAMAN STOK GUDANG
+    // ============================================================
+    function sembunyikanTombolStok() {
+        const rows = document.querySelectorAll('#body-stok tr');
+        
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells.length === 0) return;
+            
+            // Tombol aksi ada di cell terakhir (kolom AKSI)
+            const lastCell = cells[cells.length - 1];
+            const buttons = lastCell.querySelectorAll('button');
+            
+            buttons.forEach(btn => {
+                const onclick = (btn.getAttribute('onclick') || '').toLowerCase();
+                const html = btn.innerHTML.toLowerCase();
+                const title = (btn.getAttribute('title') || '').toLowerCase();
+                
+                // Deteksi tombol EDIT (openBarang)
+                const isEditBtn = 
+                    onclick.includes('openbarang') ||
+                    html.includes('ti-edit') ||
+                    title.includes('edit');
+                
+                // Deteksi tombol HAPUS (delBarang)
+                const isDeleteBtn = 
+                    onclick.includes('delbarang') ||
+                    html.includes('ti-trash') ||
+                    title.includes('hapus');
+                
+                // Sembunyikan EDIT untuk semua non-owner
+                if (isEditBtn) {
+                    btn.style.cssText = 'display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; pointer-events:none !important;';
+                    btn.disabled = true;
+                }
+                
+                // Sembunyikan HAPUS untuk semua non-owner
+                if (isDeleteBtn) {
+                    btn.style.cssText = 'display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; pointer-events:none !important;';
+                    btn.disabled = true;
+                }
+            });
+        });
+        
+        // Sembunyikan tombol "Tambah Barang" di header halaman stok
+        const semuaTombol = document.querySelectorAll('button, a');
+        semuaTombol.forEach(btn => {
+            const onclick = (btn.getAttribute('onclick') || '').toLowerCase();
+            const text = (btn.textContent || '').toLowerCase().trim();
+            
+            const isTambahBtn = 
+                text.includes('tambah barang') || 
+                onclick.includes('openbarang') ||
+                (btn.innerHTML.includes('ti-plus') && text.includes('tambah'));
+            
+            if (isTambahBtn && !btn.closest('.modal')) {
+                btn.style.cssText = 'display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; pointer-events:none !important;';
+                btn.disabled = true;
+            }
+        });
+    }
+    
+    // ============================================================
+    // 3. JALANKAN FUNGSI SECARA BERULANG
+    // ============================================================
+    // Jalankan segera
+    sembunyikanTombolStok();
+    
+    // Jalankan setiap 500ms selama 15 detik pertama untuk menangkap render tabel
+    let counter = 0;
+    const interval = setInterval(() => {
+        sembunyikanTombolStok();
+        counter++;
+        if (counter > 30) clearInterval(interval); 
+    }, 500);
+    
+    // Jalankan setiap kali user berpindah halaman
+    window.addEventListener('click', function() {
+        setTimeout(sembunyikanTombolStok, 300);
+    });
+    
+    // ============================================================
+    // 4. BLOKIR KLIK TOMBOL EDIT/HAPUS (BACKUP)
+    // ============================================================
+    document.addEventListener('click', function(e) {
+        if (userRole === 'owner') return;
+        
+        const target = e.target.closest('button, a');
+        if (!target) return;
+        
+        const onclick = (target.getAttribute('onclick') || '').toLowerCase();
+        const html = target.innerHTML.toLowerCase();
+        
+        const isEdit = 
+            onclick.includes('openbarang') ||
+            html.includes('ti-edit');
+        
+        const isDelete = 
+            onclick.includes('delbarang') ||
+            html.includes('ti-trash');
+        
+        if (isEdit || isDelete) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            alert(`⛔ AKSES DITOLAK\n\nRole "${userRole}" tidak memiliki izin untuk ${isEdit ? 'mengedit' : 'menghapus'} barang.\n\nHanya Owner yang dapat melakukan aksi ini.`);
+            console.log(`⛔ [WAS-GARAGE ONLINE] Aksi ${isEdit ? 'EDIT' : 'HAPUS'} diblokir untuk role: ${userRole}`);
+            return false;
+        }
+    }, true);
+    
+    console.log('✅ [WAS-GARAGE ONLINE] Sistem proteksi akses aktif untuk role:', userRole);
+})();
+</script>  
 </body>
 </html>
