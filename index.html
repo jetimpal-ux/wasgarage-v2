@@ -6,16 +6,16 @@
 <meta name="theme-color" content="#d32f2f"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<title>Jef-app-build</title>
+<title>Jef-service-demo</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 :root{
 --bg:#f4f4f6;--bg2:#fff;--bg3:#f5f5f7;--sidebar:#1c1c1e;
---primary:#d32f2f;--primary2:#b71c1c;--primary-dim:rgba(211,47,47,.12);
+--primary:#f95023;--primary2:#b71c1c;--primary-dim:rgba(211,47,47,.12);
 --orange:#f57f17;--orange2:#e06d1a;--orange-dim:rgba(245,127,23,.12);
 --brown:#263238;--brown2:#1c262b;
---text:#1c1c1e;--text2:#4a4a4d;--text3:#8a8a8d;
+--text:#00101d;--text2:#4a4a4d;--text3:#8a8a8d;
 --border:#e0e0e4;--border2:#c8c8cc;
 --green:#2e7d32;--red:#c62828;--blue:#1565c0;--yellow:#f57f17;
 --input-bg:#fafafa;
@@ -478,7 +478,7 @@ font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;
 <div class="garage-login-icon" id="login-icon-fallback">
 <i class="ti ti-tool"></i>
 </div>
-<div class="garage-login-title">JEF-APP-BUILD</div>
+<div class="garage-login-title">JEF-SYSTEM-DEMO</div>
 <div class="garage-login-tagline">Sistem Operasional Bengkel</div>
 </div>
 <div class="garage-login-card">
@@ -513,7 +513,7 @@ by.Jefmanado 2026 &mdash; v3.26 &middot; build 11Okt26-F
 <div class="garage-login-wrap">
 <div class="garage-login-brand">
 <div class="garage-login-icon"><i class="ti ti-lock"></i></div>
-<div class="garage-login-title">JEF-APP-BUILD</div>
+<div class="garage-login-title">JEF-SERVICE-DEMO</div>
 <div class="garage-login-tagline">Buat Password Baru</div>
 </div>
 <div class="garage-login-card">
@@ -554,8 +554,8 @@ by.Jefmanado 2026 &mdash; v3.26 &middot; build 11Okt26-F
 <div id="topnav-header">
 <div class="sb-logo-icon" style="background:var(--primary)"><i class="ti ti-tool" style="color:#fff;font-size:16px"></i></div>
 <div>
-<div class="sb-logo-text">Jef-app-build</div>
-<div class="sb-logo-sub">Je.V.3.26 - Ora et Labora &middot; build 11Okt26-F</div>
+<div class="sb-logo-text">Jef-system-demo</div>
+<div class="sb-logo-sub">Je.V.10.26 - Ora et Labora &middot; build 11Okt26-F</div>
 </div>
 <div id="topnav-user">
 <div style="text-align:right">
@@ -1534,7 +1534,7 @@ ensureModal('modal-kend',`<div class="modal">
 <select id="f-knd-pel" class="form-input"><option value="">-- Umum --</option>${pels.map(p=>`<option value="${p.id}">${p.nama}</option>`).join('')}</select>
 </div>
 <div class="form-group"><label class="form-label">Merk</label><input id="f-knd-merk" class="form-input" placeholder="Toyota, Honda..."/></div>
-<div class="form-group"><label class="form-label">Tipe/Model</label><input id="f-knd-tipe" class="form-input" placeholder="Avanza, Beat..."/></div>
+<div class="form-group"><label class="form-label">Tipe/Model</label><input id="f-knd-tipe" class="form-input" placeholder="Escape, Beat..."/></div>
 <div class="form-group"><label class="form-label">Tahun</label><input id="f-knd-tahun" class="form-input" type="number" placeholder="2020"/></div>
 <div class="form-group"><label class="form-label">Warna</label><input id="f-knd-warna" class="form-input"/></div>
 <div class="form-group"><label class="form-label">No. Mesin</label><input id="f-knd-mesin" class="form-input"/></div>
@@ -1544,7 +1544,7 @@ ensureModal('modal-kend',`<div class="modal">
 <select id="f-knd-bb" class="form-input"><option>Bensin</option><option>Solar</option><option>Gas</option><option>Listrik</option></select>
 </div>
 <div class="form-group form-full"><label class="form-label">Nama Sesuai STNK</label><input id="f-knd-stnk" class="form-input" placeholder="Nama pemilik sesuai STNK..."/></div>
-<div class="form-group form-full"><label class="form-label">Catatan / Keterangan</label><textarea id="f-knd-catatan" class="form-input" placeholder="Catatan kondisi kendaraan, riwayat servis, dll..."></textarea></div>
+<div class="form-group form-full"><label class="form-label">Catatan / Keterangan</label><textarea id="f-knd-catatan" class="form-input" placeholder="Catatan Pemilik Kendaraan, dll..."></textarea></div>
 </div>
 <input type="hidden" id="f-knd-id"/>
 </div>
@@ -2081,8 +2081,8 @@ ${kends.map(k=>`<option value="${k.id}" data-plat="${k.no_plat}" data-pel="${k.p
 </select>
 </div>
 <div class="form-group"><label class="form-label">Pelanggan</label><input id="f-wo-pel" class="form-input" placeholder="Otomatis / manual" value="${wo?.nama_pelanggan||''}"/><input type="hidden" id="f-wo-pel-id" value="${wo?.pelanggan_id||''}"/></div>
-<div class="form-group"><label class="form-label">KM Sebelum Service</label><input id="f-wo-km-awal" class="form-input" type="number" min="0" placeholder="misal: 44800" value="${wo?.km_sebelum??''}"/></div>
-<div class="form-group"><label class="form-label">KM Selesai Service</label><input id="f-wo-km" class="form-input" type="number" min="0" placeholder="misal: 45000" value="${wo?.km_selesai??''}"/></div>
+<div class="form-group"><label class="form-label">KM saat Service</label><input id="f-wo-km-awal" class="form-input" type="number" min="0" placeholder="misal: 44800" value="${wo?.km_sebelum??''}"/></div>
+<div class="form-group"><label class="form-label">KM Service Berikutnya</label><input id="f-wo-km" class="form-input" type="number" min="0" placeholder="misal: 45000" value="${wo?.km_selesai??''}"/></div>
 <div class="form-group form-full" id="wo-riwayat" style="display:none"></div>
 <div class="form-group form-full"><label class="form-label">Mekanik <span style="font-size:10px;color:var(--text3)">(bisa lebih dari 1)</span></label>
 <div id="f-wo-mek-wrap" style="border:1.5px solid var(--border);border-radius:8px;padding:8px;min-height:38px;background:var(--input-bg);cursor:pointer" onclick="toggleMekDD()">
@@ -2104,7 +2104,7 @@ ${meks.map(m=>`<label style="display:flex;align-items:center;gap:8px;padding:5px
 <div class="form-group form-full"><label class="form-label">Keluhan</label><textarea id="f-wo-keluhan" class="form-input">${wo?.keluhan||''}</textarea></div>
 <div class="form-group form-full"><label class="form-label">Diagnosa / Pekerjaan</label><textarea id="f-wo-diagnosa" class="form-input">${wo?.diagnosa||''}</textarea></div>
 <div class="form-group form-full">
-<label class="form-label">Tandai Area Kendaraan <span style="font-size:10px;color:var(--text3)">(opsional)</span></label>
+<label class="form-label">Area Perbaikan di Kendaraan <span style="font-size:10px;color:var(--text3)">(opsional)</span></label>
 <div style="position:relative;border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(180deg,#34383d,#1c1c1e);overflow:hidden">
 <div id="wo-3d" style="width:100%;height:290px;cursor:grab;touch-action:pan-y"></div>
 <div id="wo-3d-msg" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:rgba(255,255,255,.7);font-size:12px;pointer-events:none"></div>
@@ -2128,7 +2128,7 @@ ${meks.map(m=>`<label style="display:flex;align-items:center;gap:8px;padding:5px
 </table></div>
 <div class="divider"></div>
 <div class="section-hdr">
-<h2><i class="ti ti-wrench"></i> Daftar Jasa</h2>
+<h2><i class="ti ti-wrench"></i> Biaya Jasa</h2>
 <button class="btn btn-outline btn-sm" onclick="tambahBarisJasa()"><i class="ti ti-plus"></i> Tambah Jasa</button>
 </div>
 <div style="overflow-x:auto">
@@ -2149,7 +2149,7 @@ ${meks.map(m=>`<label style="display:flex;align-items:center;gap:8px;padding:5px
 <div style="flex:1;min-width:180px"></div>
 </div>
 <div style="text-align:right;padding:10px;background:var(--bg3);border-radius:8px;margin-top:8px">
-<span style="font-size:12px;color:var(--text3)">Subtotal Part: <b id="sub-part">Rp 0</b> | Total Jasa: <b id="sub-jasa">Rp 0</b> | Diskon: <b id="sub-dis">Rp 0</b></span><br>
+<span style="font-size:12px;color:var(--text3)">Subtotal Part: <b id="sub-part">Rp 0</b> | Total Biaya Jasa: <b id="sub-jasa">Rp 0</b> | Diskon: <b id="sub-dis">Rp 0</b></span><br>
 <span style="font-family:var(--font-display);font-size:18px;font-weight:800;color:var(--orange)">Total: <span id="total-wo">Rp 0</span></span>
 </div>
 <div class="divider"></div>
@@ -2490,6 +2490,7 @@ ${wo.km_sebelum?'<div class="nota-row"><span class="label">KM Sebelum Service</s
 ${wo.km_selesai?'<div class="nota-row"><span class="label">KM Selesai Service</span><span>'+Number(wo.km_selesai).toLocaleString('id-ID')+' km</span></div>':''}
 ${areaLabelsText(wo.area_kerusakan)?'<div class="nota-row"><span class="label">Area Ditandai</span><span style="max-width:180px;text-align:right">'+escHtml(areaLabelsText(wo.area_kerusakan))+'</span></div>':''}
 <div class="nota-row"><span class="label">Mekanik</span><span>${wo.nama_mekanik||'-'}</span></div>
+<div class="nota-row"><span class="label">Keluhan</span><span style="max-width:180px;text-align:right">${wo.keluhan||'-'}</span></div>
 <div class="nota-row"><span class="label">Diagnosa/Pengerjaan</span><span style="max-width:180px;text-align:right">${wo.diagnosa||'-'}</span></div>
 <hr class="nota-divider"/>
 <table class="nota-items"><thead><tr><td class="nama"><b>Item</b></td><td><b>Qty</b></td><td style="text-align:right"><b>Harga</b></td></tr></thead>
@@ -2532,6 +2533,7 @@ ${notaLogo(cfg)}
 ${wo.km_sebelum?'<div class="nota-row"><span class="label">KM Sebelum Service</span><span>'+Number(wo.km_sebelum).toLocaleString('id-ID')+' km</span></div>':''}
 <div class="nota-row"><span class="label">Mekanik</span><span>${wo.nama_mekanik||'-'}</span></div>
 ${areaLabelsText(wo.area_kerusakan)?'<div class="nota-row"><span class="label">Area Ditandai</span><span style="max-width:180px;text-align:right"><b>'+escHtml(areaLabelsText(wo.area_kerusakan))+'</b></span></div>':''}
+<div class="nota-row"><span class="label">Keluhan</span><span style="max-width:180px;text-align:right">${wo.keluhan||'-'}</span></div>
 <div class="nota-row"><span class="label">Diagnosa/Pengerjaan</span><span style="max-width:180px;text-align:right">${wo.diagnosa||'-'}</span></div>
 <hr class="nota-divider"/>
 <div style="font-size:11px;font-weight:700;margin-bottom:4px">DAFTAR PART / SPAREPART:</div>
@@ -5583,114 +5585,5 @@ if(!isResetLink) init();
 initLogin3D();
 });
 </script>
-<script>
-(function() {
-    'use strict';
-    
-    // 1. DETEKSI ROLE USER DARI LOCALSTORAGE
-    function getRole() {
-        const keys = ['currentUser', 'user', 'userData', 'loginData', 'wasUser'];
-        for (const key of keys) {
-            try {
-                const data = JSON.parse(localStorage.getItem(key));
-                if (data && data.role) return data.role.toLowerCase().trim();
-            } catch(e) {}
-        }
-        return 'user';
-    }
-    
-    const userRole = getRole();
-    console.log('🔐 [WAS-GARAGE] Role terdeteksi:', userRole);
-    
-    // Tambah class ke body untuk keperluan CSS
-    document.body.classList.add('role-' + userRole);
-
-    // Jika Owner, hentikan script (Owner boleh akses semua)
-    if (userRole === 'owner') return;
-
-    // 2. FUNGSI UTAMA: MENYEMBUNYIKAN TOMBOL
-    function sembunyikanTombol() {
-        // Cari semua baris di tabel stok gudang
-        const rows = document.querySelectorAll('#body-stok tr, tbody tr');
-        
-        rows.forEach(row => {
-            const cells = row.querySelectorAll('td');
-            if (cells.length === 0) return;
-            
-            // Biasanya tombol aksi ada di cell terakhir
-            const lastCell = cells[cells.length - 1];
-            const buttons = lastCell.querySelectorAll('button, a, [onclick]');
-            
-            buttons.forEach(btn => {
-                const onclick = (btn.getAttribute('onclick') || '').toLowerCase();
-                const text = (btn.textContent || '').toLowerCase().trim();
-                const html = btn.innerHTML.toLowerCase();
-                const title = (btn.getAttribute('title') || '').toLowerCase();
-                
-                // Deteksi Tombol EDIT
-                const isEdit = onclick.includes('edit') || onclick.includes('ubah') ||
-                              text === 'edit' || text === 'ubah' || 
-                              html.includes('edit') || html.includes('pencil') ||
-                              title.includes('edit');
-                
-                // Deteksi Tombol HAPUS
-                const isDelete = onclick.includes('hapus') || onclick.includes('delete') ||
-                                text === 'hapus' || text === 'delete' || 
-                                html.includes('trash') || html.includes('delete') ||
-                                title.includes('hapus');
-
-                // Deteksi Tombol TAMBAH (Biasanya di luar tabel, tapi kita cek juga)
-                const isTambah = text.includes('tambah') || onclick.includes('modal-brg');
-
-                // EKSEKUSI PENYEMBUNYIAN
-                
-                // Sembunyikan EDIT untuk SEMUA non-owner
-                if (isEdit) {
-                    btn.style.cssText = 'display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; pointer-events:none !important;';
-                    btn.disabled = true;
-                }
-                
-                // Sembunyikan HAPUS untuk SEMUA non-owner
-                if (isDelete) {
-                    btn.style.cssText = 'display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; pointer-events:none !important;';
-                    btn.disabled = true;
-                }
-            });
-        });
-
-        // Sembunyikan Tombol "Tambah Barang" di Header (Biasanya di atas tabel)
-        const semuaTombol = document.querySelectorAll('button, a');
-        semuaTombol.forEach(btn => {
-            const text = (btn.textContent || '').toLowerCase().trim();
-            const onclick = (btn.getAttribute('onclick') || '').toLowerCase();
-            
-            // Jika tombol berisi kata "Tambah Barang" atau membuka modal barang (dan bukan di dalam modal itu sendiri)
-            if ((text.includes('tambah barang') || text === '+ tambah' || onclick.includes("openModal('modal-brg'")) 
-                && !btn.closest('.modal')) {
-                btn.style.cssText = 'display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; pointer-events:none !important;';
-                btn.disabled = true;
-            }
-        });
-    }
-
-    // 3. JALANKAN FUNGSI SECARA BERULANG (Karena tabel di-render dinamis)
-    // Jalankan segera
-    sembunyikanTombol();
-    
-    // Jalankan setiap 500ms selama 15 detik pertama untuk menangkap render tabel
-    let counter = 0;
-    const interval = setInterval(() => {
-        sembunyikanTombol();
-        counter++;
-        if (counter > 30) clearInterval(interval); 
-    }, 500);
-
-    // Jalankan setiap kali user scroll atau klik (untuk jaga-jaga)
-    window.addEventListener('scroll', sembunyikanTombol);
-    window.addEventListener('click', sembunyikanTombol);
-
-    console.log('✅ [WAS-GARAGE] Proteksi tombol Tambah/Edit/Hapus aktif untuk role:', userRole);
-})();
-</script> 
 </body>
 </html>
